@@ -17,8 +17,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // call the github service and subscribe to the results
-    const response = this.githubServce.getGithubUserInfo('sardeenz')
+    // call the github service and subscribe to the returned observable
+    // in this example, we declared (on the fly) the reponse to be the variable 'results' but this can be called anything
+    // you could replace the variable results with the word doodoohead and it would still work fine.
+    this.githubServce.getGithubUserInfo('sardeenz')
     .subscribe((results) => {
       this.userModel = results;
       console.log('results = ', this.userModel);

@@ -11,7 +11,6 @@ import { GithubUserModel } from './github-user-model';
 export class MyGithubUserService {
 
   private url = 'https://api.github.com/users/';
-  private user: GithubUserModel;
 
   constructor(private http: HttpClient) { }
 

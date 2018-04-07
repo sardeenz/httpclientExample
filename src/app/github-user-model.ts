@@ -1,4 +1,8 @@
 // taken from http://json2ts.com/
+// this file was originally generated via 'ng g i githubUserModel'
+// which means - ng generate interface githubUserModel
+// note that the name of the typescript interface is GithubUserModel whereas the name of the file is github-user-model.ts
+// camelcase results in dashes in the filename
 export interface GithubUserModel {
     login: string;
     id: number;

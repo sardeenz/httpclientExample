@@ -1,3 +1,10 @@
+// this file was originally generated via 'ng g s myGithubUser'
+// which means - ng generate service myGithubUser
+// note that the name of the typescript interface is MyGithubUserService
+// (when you generate a service, the word Service is automatically appended)
+// whereas the name of the file is my-github-user.service.ts
+// camelcase results in dashes in the filename
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';

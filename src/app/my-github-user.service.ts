@@ -1,5 +1,5 @@
 // this file was originally generated via 'ng g s myGithubUser'
-// which means - ng generate service myGithubUser
+// which is shorthand for 'ng generate service myGithubUser'
 // note that the name of the typescript interface is MyGithubUserService
 // (when you generate a service, the word Service is automatically appended)
 // whereas the name of the file is my-github-user.service.ts
@@ -34,7 +34,6 @@ export class MyGithubUserService {
     return this.http.get<GithubUserModel>(this.fullUrl);
   }
 
-
   // I put these next 2 examples here just to illustrate an example of using the rxjs (reactive javascript) operator of map
   // there are like 150 operators in rxjs and this is just one of them. They basically help transform observables.
   // Map transforms the items emitted by an Observable by applying a function to each item
@@ -51,6 +50,7 @@ export class MyGithubUserService {
     return this.http.get<GithubUserModel>(this.fullUrl).map((x) => {
       return x.login + ' is a doodoohead';  // this is the function that transforms the value
       // I could optionally just return x which is the whole populated object of GithubUserModel
+      // if we were to just return x, it would be almost identical to the first function above.
     });
   }
 
@@ -61,8 +61,12 @@ export class MyGithubUserService {
 
     return this.http.get<GithubUserModel>(this.fullUrl).map(({ login }) => {
       return login + ' is a doodoohead2';  // this is the function that transforms the value
+      // note the use of the brackets for login in the map call. This is only because I knew I wanted to just return login
     });
   }
+
+  // you can also apply the map or filter or flatmap or any of the other rxjs operators back in your main component,
+  // they work on any observable.
 
 }
 

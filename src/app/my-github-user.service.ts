@@ -11,7 +11,6 @@ import { Observable } from 'rxjs/Observable';
 import { GithubUserModel } from './github-user-model';
 import 'rxjs/add/operator/map';
 
-
 // don't forget to add MyGithubUserService to the providers section of the app.module.ts
 // i.e. providers: [MyGithubUserService],
 // also don't forget to import HttpClientModule inside the app.module.ts
@@ -21,6 +20,7 @@ export class MyGithubUserService {
 
   private baseUrl = 'https://api.github.com/users/';
   private fullUrl: string;
+  private login: string;
 
   constructor(private http: HttpClient) { }
 
@@ -34,17 +34,32 @@ export class MyGithubUserService {
     return this.http.get<GithubUserModel>(this.fullUrl);
   }
 
+  getGithubUserInfoUsingRXJSMap(githubUsername: string): Observable<string> {
+    // concatentate the passed in variable to the end of the url i.e. https://api.github.com/users/sardeenz
+    this.fullUrl = this.baseUrl + githubUsername;
+    console.log('this.url = ', this.fullUrl);
+    return this.http.get<GithubUserModel>(this.fullUrl).map((x) => {
+      return x.login + ' is a doodoohead';  // this is the function that transforms the value
+    });
+  }
+
   // I put this here just to illustrate an example of using the rxjs (reactive javascript) operator of map
-  // there are like 150 operators in rxjs and this is just one of them.F
-  getGithubUserInfoUsingRXJSMap(githubUsername: string): Observable<GithubUserModel> {
+  // there are like 150 operators in rxjs and this is just one of them. They basically help transform observables.
+  getGithubUserLoginInfoUsingRXJSMap(githubUsername: string): Observable<string> {
     // concatentate the passed in variable to the end of the url i.e. https://api.github.com/users/sardeenz
     this.fullUrl = this.baseUrl + githubUsername;
     console.log('this.url = ', this.fullUrl);
 
-    // do a 'get' on the url and return it as type GithubUserModel
-    return this.http.get<GithubUserModel>(this.fullUrl).map(x => {
-      return x;
+    // do a 'get' on the url and use rxjs map operator to apply a function to each item emitted by the observable
+    // only the login value in this example is returned (rxjs map operator basically calls a function on each element returned) then
+    // returns it as the login variable within the type of GithubUserModel
+    // Map transform the items emitted by an Observable by applying a function to each item
+    return this.http.get<GithubUserModel>(this.fullUrl).map(({ login }) => {
+      return login + ' is a doodoohead2';  // this is the function that transforms the value
     });
   }
-}
+
+  }
+
+
 

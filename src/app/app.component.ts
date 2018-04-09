@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   userModel: GithubUserModel;
 
-  constructor(private githubServce: MyGithubUserService) {}
+  constructor(private githubServce: MyGithubUserService) { }
 
   ngOnInit(): void {
 
@@ -21,21 +21,21 @@ export class AppComponent implements OnInit {
     // in this example, we declared (on the fly) the reponse to be the variable 'results' but this can be called anything
     // you could replace the variable results with the word doodoohead and it would still work fine.
     this.githubServce.getGithubUserInfo('sardeenz')
-    .subscribe((results) => {
-      console.log('results are ', results);
-      this.userModel = results;
-      console.log('this.userModel = ', this.userModel);
-      console.log('login = ', this.userModel.login);
-    });
+      .subscribe((results) => {
+        console.log('results are ', results);
+        this.userModel = results;
+        console.log('this.userModel = ', this.userModel);
+        console.log('login = ', this.userModel.login);
+      });
 
+    // this basically does the same thing, but uses rxjs map operator
     this.githubServce.getGithubUserInfoUsingRXJSMap('sardeenz')
-    .subscribe((results) => {
-      console.log('results from the rxjs map operator are ', results);
-      this.userModel = results;
-      console.log('this.userModel FromMapOperator = ', this.userModel);
-      console.log('login FromMapOperator = ', this.userModel.login);
-    });
+      .subscribe(val => console.log('val = ', val));
 
+    // this basically does the same thing, but uses rxjs map operator
+    this.githubServce.getGithubUserLoginInfoUsingRXJSMap('sardeenz')
+      .subscribe(val => console.log('val = ', val));
   }
 
 }
+

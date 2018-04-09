@@ -22,9 +22,18 @@ export class AppComponent implements OnInit {
     // you could replace the variable results with the word doodoohead and it would still work fine.
     this.githubServce.getGithubUserInfo('sardeenz')
     .subscribe((results) => {
+      console.log('results are ', results);
       this.userModel = results;
-      console.log('results = ', this.userModel);
+      console.log('this.userModel = ', this.userModel);
       console.log('login = ', this.userModel.login);
+    });
+
+    this.githubServce.getGithubUserInfoUsingRXJSMap('sardeenz')
+    .subscribe((results) => {
+      console.log('results from the rxjs map operator are ', results);
+      this.userModel = results;
+      console.log('this.userModel FromMapOperator = ', this.userModel);
+      console.log('login FromMapOperator = ', this.userModel.login);
     });
 
   }
